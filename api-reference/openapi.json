@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.snaptrude.com"
     }
   ],
   "security": [
@@ -128,14 +128,68 @@
           }
         }
       }
+    },
+    "/import/permission": {
+      "get": {
+        "description": "check if user has edit access to project",
+        "parameters": [
+          {
+            "name": "floorkey",
+            "in": "query",
+            "description": "floorkey of the project",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Checks for two things for a given floorkey",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["access"],
+                  "type": "object",
+                  "properties": {
+                    "access": {
+                      "description": "Either the user has access or not",
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    },
+                    "image": {
+                      "description": "Latest screenshot of the project. Given as a path",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Project name",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "Plant": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "type": "object",
         "properties": {
           "name": {
@@ -154,9 +208,7 @@
             "$ref": "#/components/schemas/Plant"
           },
           {
-            "required": [
-              "id"
-            ],
+            "required": ["id"],
             "type": "object",
             "properties": {
               "id": {
@@ -169,10 +221,7 @@
         ]
       },
       "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+        "required": ["error", "message"],
         "type": "object",
         "properties": {
           "error": {
