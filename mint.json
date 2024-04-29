@@ -69,16 +69,8 @@
       "pages": ["api-reference/introduction"]
     },
     {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
-      ]
-    },
-    {
       "group": "Snaptrude Manager (Import)",
-      "pages": ["api-reference/import/permission"]
+      "pages": ["api-reference/import/permission", "api-reference/import/state"]
     }
   ],
   "footerSocials": {
