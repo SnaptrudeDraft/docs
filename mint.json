@@ -70,7 +70,11 @@
     },
     {
       "group": "Snaptrude Manager (Import)",
-      "pages": ["api-reference/import/permission", "api-reference/import/state"]
+      "pages": [
+        "api-reference/import/permission",
+        "api-reference/import/getstate",
+        "api-reference/import/setstate"
+      ]
     }
   ],
   "footerSocials": {

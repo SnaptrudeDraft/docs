@@ -155,6 +155,110 @@
             }
           }
         }
+      },
+      "post": {
+        "description": "Used to get the import state for given floorkey. The possible values to set are: \n 1. \"NA\": Not available \n 2. \"NEW\": New project imported from revit \n 3. \"RFA\": RFA Pending Import \n 4. \"MODIFIED\": Modified project \n 5. \"DONE\": Imported project that is already upto date",
+        "parameters": [
+          {
+            "name": "floorkey",
+            "in": "query",
+            "description": "floorkey of the project",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "revitImportState",
+            "in": "query",
+            "description": "must be NA/NEW/RFA/MODIFIED/DONE",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["project"],
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "description": "",
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "description": "Project name",
+                          "type": "string"
+                        },
+                        "importStates": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "revitImportState": {
+                              "description": "Revit import state",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "floorkey does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "no project",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "unknown exception / server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Internal Server Error",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unknown exception / server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Internal Server Error",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
