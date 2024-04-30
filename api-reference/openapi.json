@@ -608,6 +608,348 @@
           }
         }
       }
+    },
+    "/newBlankProject": {
+      "post": {
+        "description": "Create a new blank project in Snaptrude",
+        "parameters": [
+          {
+            "name": "project_name",
+            "in": "query",
+            "description": "name of the project",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "team_id",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "folder_id",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["project"],
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "description": "folders from workspace",
+                      "type": "object",
+                      "properties": {
+                        "updated": {
+                          "description": "last updated date and time",
+                          "type": "string"
+                        },
+                        "added": {
+                          "description": "added on date and time",
+                          "type": "string"
+                        },
+                        "key": {
+                          "description": "floor key",
+                          "type": "string"
+                        },
+                        "speckleStreamId": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "isSpeckleImportDone": {
+                          "description": "",
+                          "type": "boolean"
+                        },
+                        "threeDUrl": {
+                          "description": "Image path in Django server",
+                          "type": "string"
+                        },
+                        "desc": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "importStates": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "revitImportState": {
+                              "description": "Revit import state (NA/NEW/RFA/MODIFIED/DONE)",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "name": {
+                          "description": "project name",
+                          "type": "string"
+                        },
+                        "url": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "createdby": {
+                          "description": "user name",
+                          "type": "string"
+                        },
+                        "public": {
+                          "description": "",
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Project created successfully.",
+                      "type": "string"
+                    },
+                    "floorkey": {
+                      "description": "floor key",
+                      "type": "string"
+                    },
+                    "error": {
+                      "description": "error code",
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/teams/active": {
+      "post": {
+        "description": "Get list of all active teams. This data is further used to get workspaces of a user.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["teams"],
+                  "type": "object",
+                  "properties": {
+                    "teams": {
+                      "description": "active teams list",
+                      "type": "array",
+                      "items": {
+                        "description": "Team",
+                        "type": "object",
+                        "properties": {
+                          "domain": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isManuallyPaid": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "role": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the team",
+                            "type": "string"
+                          },
+                          "members": {
+                            "description": "members of the team",
+                            "type": "array",
+                            "items": {
+                              "description": "TeamMember",
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "team_member_id": {
+                                  "description": "",
+                                  "type": "integer",
+                                  "format": "int64"
+                                },
+                                "access_level": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "role": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "user": {
+                                  "description": "user details",
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "user id",
+                                      "type": "integer",
+                                      "format": "int64"
+                                    },
+                                    "name": {
+                                      "description": "user name",
+                                      "type": "string"
+                                    },
+                                    "email": {
+                                      "description": "user email",
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "email": {
+                                  "description": "user email",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "admin": {
+                            "description": "admin details",
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "admin id",
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "name": {
+                                "description": "admin name",
+                                "type": "string"
+                              },
+                              "email": {
+                                "description": "admin email",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "membersCount": {
+                            "description": "number of members in the team",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "id": {
+                            "description": "team id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "manualPlanLastsUntil": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/{teamId}/getrole": {
+      "post": {
+        "description": "Get list of permissions for each role in a team. This data is further used to check weather the admin or creator has permission to create project.",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "team id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["team"],
+                  "type": "object",
+                  "properties": {
+                    "team": {
+                      "description": "",
+                      "type": "object",
+                      "properties": {
+                        "role": {
+                          "description": "admin | creator | viewer | editor",
+                          "type": "string"
+                        },
+                        "permissions": {
+                          "description": "",
+                          "type": "array",
+                          "items": {
+                            "description": "permission",
+                            "type": "object",
+                            "properties": {
+                              "create_project": {
+                                "description": "create project permission",
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        },
+                        "id": {
+                          "description": "team id",
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
