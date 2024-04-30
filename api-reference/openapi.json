@@ -950,6 +950,330 @@
           }
         }
       }
+    },
+    "/team/{teamId}/project": {
+      "get": {
+        "description": "Get list of projects of a team.",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "team id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Defines the maximum count of projects to be fetched.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Determines the number of projects to bypass before retrieving the initial project. (Set to 0 if not relevant)",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["projects"],
+                  "type": "object",
+                  "properties": {
+                    "projects": {
+                      "description": "",
+                      "type": "array",
+                      "items": {
+                        "description": "Project",
+                        "type": "object",
+                        "properties": {
+                          "updated": {
+                            "description": "last updated date and time",
+                            "type": "string"
+                          },
+                          "added": {
+                            "description": "added on date and time",
+                            "type": "string"
+                          },
+                          "key": {
+                            "description": "floor key",
+                            "type": "string"
+                          },
+                          "speckleStreamId": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isSpeckleImportDone": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "threeDUrl": {
+                            "description": "Image path in Django server",
+                            "type": "string"
+                          },
+                          "desc": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "importStates": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "revitImportState": {
+                                "description": "Revit import state (NA/NEW/RFA/MODIFIED/DONE)",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "name": {
+                            "description": "project name",
+                            "type": "string"
+                          },
+                          "url": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "createdby": {
+                            "description": "user name",
+                            "type": "string"
+                          },
+                          "public": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refreshAccessToken": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "content-type",
+            "schema": {
+              "type": "string",
+              "example": "application/json"
+            },
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5YzQzZTBhLTliOTUtNGE5OS1hMGM4LTc1YzEyYzhiZjI4NCJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2MzU4MiwiaWQiOjIsImV4cCI6MTcxMzA5NTU4MiwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.n75HlDxabMI-nB08IjEZ4PMgE0r9XGcCSxcyB80dtOo"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ3ZTQ3MDY1LWRkYWUtNGIwMy1hYzU1LThhNjdmMzNkMDBmZSJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjIxODc1MSwiaWQiOjIsImV4cCI6MTcxMzA4Mjc1MSwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.DvLZskvgNcO-uK8Kez-mDZxysBLQZspScwKsTess4yo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP Status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjgwNTQ3NDk4LTk1MzgtNDY2OC05Y2EwLWI4YTE0OTBmMmVjYyJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2Mzk1NywiaWQiOjIsImV4cCI6MTcxMzA5NTk1NywiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.IvfoyxBwIPQN8CprNaLvvqjwRZ41VMWpLPA7pc1X5Fc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getuserprofile": {
+      "post": {
+        "description": "Get user details",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "HTTP Status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "activePlan": {
+                      "type": "string",
+                      "example": "none"
+                    },
+                    "customer_lifeCycle": {
+                      "type": "string",
+                      "example": "Paid_User"
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "10c1b4"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "9999999999"
+                    },
+                    "isPro": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "projects_creation_progress": {
+                      "type": "string",
+                      "example": "morethantwoprojectscreated"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 2
+                    },
+                    "date_joined": {
+                      "type": "string",
+                      "example": "2023-08-28T06:42:33.886Z"
+                    },
+                    "is_anonymous": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "India"
+                    },
+                    "fullname": {
+                      "type": "string",
+                      "example": "shashank"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "shashank.a@snaptrude.com"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getprojects": {
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5YzQzZTBhLTliOTUtNGE5OS1hMGM4LTc1YzEyYzhiZjI4NCJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2MzU4MiwiaWQiOjIsImV4cCI6MTcxMzA5NTU4MiwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.n75HlDxabMI-nB08IjEZ4PMgE0r9XGcCSxcyB80dtOo"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP Status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "description": "project",
+                    "type": "object",
+                    "properties": {
+                      "created_from": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "updated": {
+                        "type": "string",
+                        "example": "2024-04-09 04:31:51.221000+00:00"
+                      },
+                      "added": {
+                        "type": "string",
+                        "example": "2024-04-09 03:44:46.230000+00:00"
+                      },
+                      "threeDUrl": {
+                        "type": "string",
+                        "example": "2/AOCQWZ/structure_0/dir_0/threeD_AOCQWZ_5ec5XL8.png"
+                      },
+                      "key": {
+                        "type": "string",
+                        "example": "AOCQWZ"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "desc": {
+                        "type": "string",
+                        "example": "None"
+                      },
+                      "public": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "test2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
