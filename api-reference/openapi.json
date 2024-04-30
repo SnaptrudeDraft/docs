@@ -260,6 +260,354 @@
           }
         }
       }
+    },
+    "/s3/presigned-url/upload": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Path inside AWS S3 bucket to upload at",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["url", "fields"],
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "description": "https://snaptrude-xyz.s3.amazonaws.com/",
+                      "type": "string"
+                    },
+                    "fields": {
+                      "description": "authorization details",
+                      "type": "object",
+                      "properties": {
+                        "x-amz-algorithm": {
+                          "description": "authorization algorithm",
+                          "type": "string"
+                        },
+                        "key": {
+                          "description": "path to upload at",
+                          "type": "string"
+                        },
+                        "x-amz-signature": {
+                          "description": "AWS signature",
+                          "type": "string"
+                        },
+                        "policy": {
+                          "description": "policy",
+                          "type": "string"
+                        },
+                        "x-amz-date": {
+                          "description": "date",
+                          "type": "string"
+                        },
+                        "x-amz-credential": {
+                          "description": "credential",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/s3/presigned-url/download": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Path inside AWS S3 bucket to download from",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["url"],
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "description": "https://snaptrude-xyz.s3.amazonaws.com/",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/folderWithoutProject": {
+      "post": {
+        "description": "Retrieve folders from my workspace, restricted to a single level.",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Determines the number of folders to bypass before retrieving the initial folder. (Set to 0 if not relevant)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Defines the maximum count of folders to be fetched.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "folder",
+            "in": "query",
+            "description": "(optional) Represents the parent folder's unique ID. If not specified, the API call will retrieve folders within my workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["folders"],
+                  "type": "object",
+                  "properties": {
+                    "folders": {
+                      "description": "folders from workspace",
+                      "type": "array",
+                      "items": {
+                        "description": "Folder",
+                        "type": "object",
+                        "properties": {
+                          "all_parents": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the folder",
+                            "type": "string"
+                          },
+                          "user_dashboard": {
+                            "description": "user id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "deleted": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "immediate_parent": {
+                            "description": "parent folder id, folder is at root level so null",
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "description": "user id who created the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "last_updated_by": {
+                            "description": "user id who last updated the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "team_dashboard": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "folder id",
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/{teamId}/folderWithoutProject": {
+      "post": {
+        "description": "Retrieve folders from my workspace, restricted to a single level.",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "team id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Determines the number of folders to bypass before retrieving the initial folder. (Set to 0 if not relevant)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Defines the maximum count of folders to be fetched.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "folder",
+            "in": "query",
+            "description": "(optional) Represents the parent folder's unique ID. If not specified, the API call will retrieve folders within my workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": ["folders"],
+                  "type": "object",
+                  "properties": {
+                    "folders": {
+                      "description": "folders from workspace",
+                      "type": "array",
+                      "items": {
+                        "description": "Folder",
+                        "type": "object",
+                        "properties": {
+                          "all_parents": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the folder",
+                            "type": "string"
+                          },
+                          "user_dashboard": {
+                            "description": "user id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "deleted": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "immediate_parent": {
+                            "description": "parent folder id, folder is at root level so null",
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "description": "user id who created the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "last_updated_by": {
+                            "description": "user id who last updated the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "team_dashboard": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "folder id",
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

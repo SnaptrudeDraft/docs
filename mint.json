@@ -73,7 +73,18 @@
       "pages": [
         "api-reference/import/permission",
         "api-reference/import/getstate",
-        "api-reference/import/setstate"
+        "api-reference/import/setstate",
+        "api-reference/s3/presigned-url/upload",
+        "api-reference/s3/presigned-url/download",
+        "api-reference/folderWithoutProject",
+        "api-reference/team/folderWithoutProject",
+        "api-reference/newBlankProject",
+        "api-reference/user/teams/active",
+        "api-reference/team/getrole",
+        "api-reference/team/project",
+        "api-reference/refreshAccessToken",
+        "api-reference/getuserprofile",
+        "api-reference/getprojects"
       ]
     }
   ],
