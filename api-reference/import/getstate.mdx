@@ -1,4 +1,10 @@
 ---
-title: 'get revit import state'
+title: '/import/state'
 openapi: 'GET /import/state'
 ---
+Used to get the import state for given floorkey. The possible responses are:
+1. \"NA\": Not available
+2. \"NEW\": New project imported from revit
+3. \"RFA\": RFA Pending Import
+4. \"MODIFIED\": Modified project
+5. \"DONE\": Imported project that is already upto date

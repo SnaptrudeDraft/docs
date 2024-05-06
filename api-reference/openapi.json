@@ -15,13 +15,13 @@
   ],
   "security": [
     {
-      "bearerAuth": []
+      "ApiKeyAuth": []
     }
   ],
   "paths": {
     "/import/permission": {
       "get": {
-        "description": "Checks for two things for a given floorkey: \n 1. floorkey exists in Snaptrude \n 2. user has edit permission to the project",
+        "description": "Check for permission",
         "parameters": [
           {
             "name": "floorkey",
@@ -77,7 +77,7 @@
     },
     "/import/state": {
       "get": {
-        "description": "Used to get the import state for given floorkey. The possible responses are: \n 1. \"NA\": Not available \n 2. \"NEW\": New project imported from revit \n 3. \"RFA\": RFA Pending Import \n 4. \"MODIFIED\": Modified project \n 5. \"DONE\": Imported project that is already upto date",
+        "description": "Get revit import state",
         "parameters": [
           {
             "name": "floorkey",
@@ -157,7 +157,7 @@
         }
       },
       "post": {
-        "description": "Used to get the import state for given floorkey. The possible values to set are: \n 1. \"NA\": Not available \n 2. \"NEW\": New project imported from revit \n 3. \"RFA\": RFA Pending Import \n 4. \"MODIFIED\": Modified project \n 5. \"DONE\": Imported project that is already upto date",
+        "description": "Set revit import state",
         "parameters": [
           {
             "name": "floorkey",
@@ -263,7 +263,7 @@
     },
     "/s3/presigned-url/upload": {
       "post": {
-        "description": "",
+        "description": "Get presigned url of S3 bucket to upload data",
         "parameters": [
           {
             "name": "path",
@@ -337,7 +337,7 @@
     },
     "/s3/presigned-url/download": {
       "get": {
-        "description": "",
+        "description": "Get presigned url of S3 bucket to download data",
         "parameters": [
           {
             "name": "path",
@@ -381,7 +381,7 @@
     },
     "/folderWithoutProject": {
       "post": {
-        "description": "Retrieve folders from my workspace, restricted to a single level.",
+        "description": "Get folders from my workspace",
         "parameters": [
           {
             "name": "offset",
@@ -491,7 +491,7 @@
     },
     "/team/{teamId}/folderWithoutProject": {
       "post": {
-        "description": "Retrieve folders from my workspace, restricted to a single level.",
+        "description": "Get folders from the team",
         "parameters": [
           {
             "name": "teamId",
@@ -742,7 +742,7 @@
     },
     "/user/teams/active": {
       "post": {
-        "description": "Get list of all active teams. This data is further used to get workspaces of a user.",
+        "description": "Get list of all active teams",
         "parameters": [],
         "responses": {
           "200": {
@@ -882,7 +882,7 @@
     },
     "/team/{teamId}/getrole": {
       "post": {
-        "description": "Get list of permissions for each role in a team. This data is further used to check weather the admin or creator has permission to create project.",
+        "description": "Get list of permissions for each role in a team",
         "parameters": [
           {
             "name": "teamId",
@@ -1081,7 +1081,7 @@
     },
     "/refreshAccessToken": {
       "post": {
-        "description": "",
+        "description": "Get a new access token",
         "parameters": [
           {
             "in": "header",
@@ -1089,15 +1089,6 @@
             "schema": {
               "type": "string",
               "example": "application/json"
-            },
-            "required": true
-          },
-          {
-            "in": "header",
-            "name": "authorization",
-            "schema": {
-              "type": "string",
-              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5YzQzZTBhLTliOTUtNGE5OS1hMGM4LTc1YzEyYzhiZjI4NCJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2MzU4MiwiaWQiOjIsImV4cCI6MTcxMzA5NTU4MiwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.n75HlDxabMI-nB08IjEZ4PMgE0r9XGcCSxcyB80dtOo"
             },
             "required": true
           }
@@ -1208,6 +1199,7 @@
     },
     "/getprojects": {
       "post": {
+        "description": "Get list of projects of a user",
         "parameters": [
           {
             "in": "header",
@@ -1325,9 +1317,11 @@
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "auth",
+        "description": "Bearer <token>"
       }
     }
   }
