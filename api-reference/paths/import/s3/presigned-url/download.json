@@ -1,0 +1,44 @@
+{
+  "get": {
+    "description": "Get presigned url of S3 bucket to download data",
+    "parameters": [
+      {
+        "name": "path",
+        "in": "query",
+        "description": "Path inside AWS S3 bucket to download from",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["url"],
+              "type": "object",
+              "properties": {
+                "url": {
+                  "description": "https://snaptrude-xyz.s3.amazonaws.com/",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../../../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

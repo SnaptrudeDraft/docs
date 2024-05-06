@@ -45,25 +45,25 @@
     },
     {
       "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
+      "pages": ["api-reference/APIs/introduction"]
     },
     {
       "group": "Snaptrude Manager (Import)",
       "pages": [
-        "api-reference/import/permission",
-        "api-reference/import/getstate",
-        "api-reference/import/setstate",
-        "api-reference/s3/presigned-url/upload",
-        "api-reference/s3/presigned-url/download",
-        "api-reference/folderWithoutProject",
-        "api-reference/team/folderWithoutProject",
-        "api-reference/newBlankProject",
-        "api-reference/user/teams/active",
-        "api-reference/team/getrole",
-        "api-reference/team/project",
-        "api-reference/refreshAccessToken",
-        "api-reference/getuserprofile",
-        "api-reference/getprojects"
+        "api-reference/APIs/import/permission",
+        "api-reference/APIs/import/getstate",
+        "api-reference/APIs/import/setstate",
+        "api-reference/APIs/s3/presigned-url/upload",
+        "api-reference/APIs/s3/presigned-url/download",
+        "api-reference/APIs/folderWithoutProject",
+        "api-reference/APIs/team/folderWithoutProject",
+        "api-reference/APIs/newBlankProject",
+        "api-reference/APIs/user/teams/active",
+        "api-reference/APIs/team/getrole",
+        "api-reference/APIs/team/project",
+        "api-reference/APIs/refreshAccessToken",
+        "api-reference/APIs/getuserprofile",
+        "api-reference/APIs/getprojects"
       ]
     }
   ],

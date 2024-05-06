@@ -1,0 +1,70 @@
+{
+  "post": {
+    "description": "Get list of projects of a user",
+    "parameters": [
+      {
+        "in": "header",
+        "name": "authorization",
+        "schema": {
+          "type": "string",
+          "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5YzQzZTBhLTliOTUtNGE5OS1hMGM4LTc1YzEyYzhiZjI4NCJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2MzU4MiwiaWQiOjIsImV4cCI6MTcxMzA5NTU4MiwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.n75HlDxabMI-nB08IjEZ4PMgE0r9XGcCSxcyB80dtOo"
+        },
+        "required": true
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "HTTP Status 200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "description": "project",
+                "type": "object",
+                "properties": {
+                  "created_from": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "updated": {
+                    "type": "string",
+                    "example": "2024-04-09 04:31:51.221000+00:00"
+                  },
+                  "added": {
+                    "type": "string",
+                    "example": "2024-04-09 03:44:46.230000+00:00"
+                  },
+                  "threeDUrl": {
+                    "type": "string",
+                    "example": "2/AOCQWZ/structure_0/dir_0/threeD_AOCQWZ_5ec5XL8.png"
+                  },
+                  "key": {
+                    "type": "string",
+                    "example": "AOCQWZ"
+                  },
+                  "url": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "desc": {
+                    "type": "string",
+                    "example": "None"
+                  },
+                  "public": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "test2"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

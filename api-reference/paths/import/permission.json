@@ -1,0 +1,56 @@
+{
+  "get": {
+    "description": "Check for permission",
+    "parameters": [
+      {
+        "name": "floorkey",
+        "in": "query",
+        "description": "floorkey of the project",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Checks for two things for a given floorkey",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["access"],
+              "type": "object",
+              "properties": {
+                "access": {
+                  "description": "Either the user has access or not",
+                  "type": "boolean"
+                },
+                "message": {
+                  "description": "Success/failure (invalid)",
+                  "type": "string"
+                },
+                "image": {
+                  "description": "Latest screenshot of the project. Given as a path",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Project name",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "post": {
+    "description": "Get list of all active teams",
+    "parameters": [],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["teams"],
+              "type": "object",
+              "properties": {
+                "teams": {
+                  "description": "active teams list",
+                  "type": "array",
+                  "items": {
+                    "description": "Team",
+                    "type": "object",
+                    "properties": {
+                      "domain": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "isManuallyPaid": {
+                        "description": "",
+                        "type": "boolean"
+                      },
+                      "role": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "name": {
+                        "description": "name of the team",
+                        "type": "string"
+                      },
+                      "members": {
+                        "description": "members of the team",
+                        "type": "array",
+                        "items": {
+                          "description": "TeamMember",
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "team_member_id": {
+                              "description": "",
+                              "type": "integer",
+                              "format": "int64"
+                            },
+                            "access_level": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "role": {
+                              "description": "",
+                              "type": "string"
+                            },
+                            "user": {
+                              "description": "user details",
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "description": "user id",
+                                  "type": "integer",
+                                  "format": "int64"
+                                },
+                                "name": {
+                                  "description": "user name",
+                                  "type": "string"
+                                },
+                                "email": {
+                                  "description": "user email",
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "email": {
+                              "description": "user email",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "admin": {
+                        "description": "admin details",
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "admin id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "name": {
+                            "description": "admin name",
+                            "type": "string"
+                          },
+                          "email": {
+                            "description": "admin email",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "membersCount": {
+                        "description": "number of members in the team",
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "id": {
+                        "description": "team id",
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "manualPlanLastsUntil": {
+                        "description": "",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

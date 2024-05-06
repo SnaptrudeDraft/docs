@@ -1,0 +1,131 @@
+{
+  "post": {
+    "description": "Create a new blank project in Snaptrude",
+    "parameters": [
+      {
+        "name": "project_name",
+        "in": "query",
+        "description": "name of the project",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "team_id",
+        "in": "query",
+        "description": "",
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      {
+        "name": "folder_id",
+        "in": "query",
+        "description": "",
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["project"],
+              "type": "object",
+              "properties": {
+                "project": {
+                  "description": "folders from workspace",
+                  "type": "object",
+                  "properties": {
+                    "updated": {
+                      "description": "last updated date and time",
+                      "type": "string"
+                    },
+                    "added": {
+                      "description": "added on date and time",
+                      "type": "string"
+                    },
+                    "key": {
+                      "description": "floor key",
+                      "type": "string"
+                    },
+                    "speckleStreamId": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "isSpeckleImportDone": {
+                      "description": "",
+                      "type": "boolean"
+                    },
+                    "threeDUrl": {
+                      "description": "Image path in Django server",
+                      "type": "string"
+                    },
+                    "desc": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "importStates": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "revitImportState": {
+                          "description": "Revit import state (NA/NEW/RFA/MODIFIED/DONE)",
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "name": {
+                      "description": "project name",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "",
+                      "type": "string"
+                    },
+                    "createdby": {
+                      "description": "user name",
+                      "type": "string"
+                    },
+                    "public": {
+                      "description": "",
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "message": {
+                  "description": "Project created successfully.",
+                  "type": "string"
+                },
+                "floorkey": {
+                  "description": "floor key",
+                  "type": "string"
+                },
+                "error": {
+                  "description": "error code",
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

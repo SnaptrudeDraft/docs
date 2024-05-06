@@ -1,0 +1,74 @@
+{
+  "post": {
+    "description": "Get presigned url of S3 bucket to upload data",
+    "parameters": [
+      {
+        "name": "path",
+        "in": "query",
+        "description": "Path inside AWS S3 bucket to upload at",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["url", "fields"],
+              "type": "object",
+              "properties": {
+                "url": {
+                  "description": "https://snaptrude-xyz.s3.amazonaws.com/",
+                  "type": "string"
+                },
+                "fields": {
+                  "description": "authorization details",
+                  "type": "object",
+                  "properties": {
+                    "x-amz-algorithm": {
+                      "description": "authorization algorithm",
+                      "type": "string"
+                    },
+                    "key": {
+                      "description": "path to upload at",
+                      "type": "string"
+                    },
+                    "x-amz-signature": {
+                      "description": "AWS signature",
+                      "type": "string"
+                    },
+                    "policy": {
+                      "description": "policy",
+                      "type": "string"
+                    },
+                    "x-amz-date": {
+                      "description": "date",
+                      "type": "string"
+                    },
+                    "x-amz-credential": {
+                      "description": "credential",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../../../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

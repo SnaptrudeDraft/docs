@@ -1,0 +1,71 @@
+{
+  "post": {
+    "description": "Get list of permissions for each role in a team",
+    "parameters": [
+      {
+        "name": "teamId",
+        "in": "path",
+        "description": "team id",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["team"],
+              "type": "object",
+              "properties": {
+                "team": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "description": "admin | creator | viewer | editor",
+                      "type": "string"
+                    },
+                    "permissions": {
+                      "description": "",
+                      "type": "array",
+                      "items": {
+                        "description": "permission",
+                        "type": "object",
+                        "properties": {
+                          "create_project": {
+                            "description": "create project permission",
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "id": {
+                      "description": "team id",
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

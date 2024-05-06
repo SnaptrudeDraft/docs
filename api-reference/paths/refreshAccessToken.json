@@ -1,0 +1,49 @@
+{
+  "post": {
+    "description": "Get a new access token",
+    "parameters": [
+      {
+        "in": "header",
+        "name": "content-type",
+        "schema": {
+          "type": "string",
+          "example": "application/json"
+        },
+        "required": true
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "refreshToken": {
+                "type": "string",
+                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ3ZTQ3MDY1LWRkYWUtNGIwMy1hYzU1LThhNjdmMzNkMDBmZSJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjIxODc1MSwiaWQiOjIsImV4cCI6MTcxMzA4Mjc1MSwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.DvLZskvgNcO-uK8Kez-mDZxysBLQZspScwKsTess4yo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "HTTP Status 200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accessToken": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjgwNTQ3NDk4LTk1MzgtNDY2OC05Y2EwLWI4YTE0OTBmMmVjYyJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2Mzk1NywiaWQiOjIsImV4cCI6MTcxMzA5NTk1NywiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.IvfoyxBwIPQN8CprNaLvvqjwRZ41VMWpLPA7pc1X5Fc"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
