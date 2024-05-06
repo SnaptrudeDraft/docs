@@ -46,7 +46,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../schemas/Error.json"
+              "$ref": "../../schemas/Error.json"
             }
           }
         }
