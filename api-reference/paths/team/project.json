@@ -1,0 +1,128 @@
+{
+  "get": {
+    "description": "Get list of projects of a team.",
+    "parameters": [
+      {
+        "name": "teamId",
+        "in": "path",
+        "description": "team id",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      {
+        "name": "limit",
+        "in": "query",
+        "description": "Defines the maximum count of projects to be fetched.",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "offset",
+        "in": "query",
+        "description": "Determines the number of projects to bypass before retrieving the initial project. (Set to 0 if not relevant)",
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["projects"],
+              "type": "object",
+              "properties": {
+                "projects": {
+                  "description": "",
+                  "type": "array",
+                  "items": {
+                    "description": "Project",
+                    "type": "object",
+                    "properties": {
+                      "updated": {
+                        "description": "last updated date and time",
+                        "type": "string"
+                      },
+                      "added": {
+                        "description": "added on date and time",
+                        "type": "string"
+                      },
+                      "key": {
+                        "description": "floor key",
+                        "type": "string"
+                      },
+                      "speckleStreamId": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "isSpeckleImportDone": {
+                        "description": "",
+                        "type": "boolean"
+                      },
+                      "threeDUrl": {
+                        "description": "Image path in Django server",
+                        "type": "string"
+                      },
+                      "desc": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "importStates": {
+                        "type": "object",
+                        "description": "",
+                        "properties": {
+                          "revitImportState": {
+                            "description": "Revit import state (NA/NEW/RFA/MODIFIED/DONE)",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "name": {
+                        "description": "project name",
+                        "type": "string"
+                      },
+                      "url": {
+                        "description": "",
+                        "type": "string"
+                      },
+                      "createdby": {
+                        "description": "user name",
+                        "type": "string"
+                      },
+                      "public": {
+                        "description": "",
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "description": "Success/failure (invalid)",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Unexpected error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../../schemas/Error.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

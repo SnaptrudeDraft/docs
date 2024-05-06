@@ -1,0 +1,186 @@
+{
+  "get": {
+    "description": "Get revit import state",
+    "parameters": [
+      {
+        "name": "floorkey",
+        "in": "query",
+        "description": "floorkey of the project",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["project"],
+              "type": "object",
+              "properties": {
+                "project": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "description": "Project name",
+                      "type": "string"
+                    },
+                    "importStates": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "revitImportState": {
+                          "description": "Revit import state",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "floorkey does not exist",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "no project",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "unknown exception / server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Internal Server Error",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "description": "Set revit import state",
+    "parameters": [
+      {
+        "name": "floorkey",
+        "in": "query",
+        "description": "floorkey of the project",
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "revitImportState",
+        "in": "query",
+        "description": "must be NA/NEW/RFA/MODIFIED/DONE",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "required": ["project"],
+              "type": "object",
+              "properties": {
+                "project": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "description": "Project name",
+                      "type": "string"
+                    },
+                    "importStates": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "revitImportState": {
+                          "description": "Revit import state",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "unknown exception / server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Internal Server Error",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "floorkey does not exist",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "no project",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "unknown exception / server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Internal Server Error",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

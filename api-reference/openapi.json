@@ -38,7 +38,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["access"],
+                  "required": [
+                    "access"
+                  ],
                   "type": "object",
                   "properties": {
                     "access": {
@@ -94,7 +96,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["project"],
+                  "required": [
+                    "project"
+                  ],
                   "type": "object",
                   "properties": {
                     "project": {
@@ -182,7 +186,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["project"],
+                  "required": [
+                    "project"
+                  ],
                   "type": "object",
                   "properties": {
                     "project": {
@@ -204,6 +210,22 @@
                           }
                         }
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unknown exception / server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Internal Server Error",
+                      "type": "string"
                     }
                   }
                 }
@@ -241,22 +263,6 @@
                 }
               }
             }
-          },
-          "403": {
-            "description": "unknown exception / server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "description": "Internal Server Error",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -280,7 +286,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["url", "fields"],
+                  "required": [
+                    "url",
+                    "fields"
+                  ],
                   "type": "object",
                   "properties": {
                     "url": {
@@ -354,7 +363,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["url"],
+                  "required": [
+                    "url"
+                  ],
                   "type": "object",
                   "properties": {
                     "url": {
@@ -414,7 +425,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["folders"],
+                  "required": [
+                    "folders"
+                  ],
                   "type": "object",
                   "properties": {
                     "folders": {
@@ -534,7 +547,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["folders"],
+                  "required": [
+                    "folders"
+                  ],
                   "type": "object",
                   "properties": {
                     "folders": {
@@ -646,7 +661,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["project"],
+                  "required": [
+                    "project"
+                  ],
                   "type": "object",
                   "properties": {
                     "project": {
@@ -750,7 +767,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["teams"],
+                  "required": [
+                    "teams"
+                  ],
                   "type": "object",
                   "properties": {
                     "teams": {
@@ -901,7 +920,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["team"],
+                  "required": [
+                    "team"
+                  ],
                   "type": "object",
                   "properties": {
                     "team": {
@@ -990,7 +1011,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "required": ["projects"],
+                  "required": [
+                    "projects"
+                  ],
                   "type": "object",
                   "properties": {
                     "projects": {
@@ -1270,40 +1293,11 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": ["name"],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": ["id"],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
       "Error": {
-        "required": ["error", "message"],
+        "required": [
+          "error",
+          "message"
+        ],
         "type": "object",
         "properties": {
           "error": {

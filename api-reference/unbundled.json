@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI Plant Store",
+    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.snaptrude.com"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/import/permission": {
+      "$ref": "./paths/import/permission.json"
+    },
+    "/import/state": {
+      "$ref": "./paths/import/state.json"
+    },
+    "/s3/presigned-url/upload": {
+      "$ref": "./paths/s3/presigned-url/upload.json"
+    },
+    "/s3/presigned-url/download": {
+      "$ref": "./paths/s3/presigned-url/download.json"
+    },
+    "/folderWithoutProject": {
+      "$ref": "./paths/folderWithoutProject.json"
+    },
+    "/team/{teamId}/folderWithoutProject": {
+      "$ref": "./paths/team/folderWithoutProject.json"
+    },
+    "/newBlankProject": {
+      "$ref": "./paths/newBlankProject.json"
+    },
+    "/user/teams/active": {
+      "$ref": "./paths/user/teams/active.json"
+    },
+    "/team/{teamId}/getrole": {
+      "$ref": "./paths/team/getrole.json"
+    },
+    "/team/{teamId}/project": {
+      "$ref": "./paths/team/project.json"
+    },
+    "/refreshAccessToken": {
+      "$ref": "./paths/refreshAccessToken.json"
+    },
+    "/getuserprofile": {
+      "$ref": "./paths/getuserprofile.json"
+    },
+    "/getprojects": {
+      "$ref": "./paths/getprojects.json"
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "auth",
+        "description": "Bearer <token>"
+      }
+    }
+  }
+}

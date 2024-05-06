@@ -1,0 +1,69 @@
+{
+  "post": {
+    "description": "Get user details",
+    "parameters": [],
+    "responses": {
+      "200": {
+        "description": "HTTP Status 200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "activePlan": {
+                  "type": "string",
+                  "example": "none"
+                },
+                "customer_lifeCycle": {
+                  "type": "string",
+                  "example": "Paid_User"
+                },
+                "color": {
+                  "type": "string",
+                  "example": "10c1b4"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "9999999999"
+                },
+                "isPro": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "projects_creation_progress": {
+                  "type": "string",
+                  "example": "morethantwoprojectscreated"
+                },
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 2
+                },
+                "date_joined": {
+                  "type": "string",
+                  "example": "2023-08-28T06:42:33.886Z"
+                },
+                "is_anonymous": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "country": {
+                  "type": "string",
+                  "example": "India"
+                },
+                "fullname": {
+                  "type": "string",
+                  "example": "shashank"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "shashank.a@snaptrude.com"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

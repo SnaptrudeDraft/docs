@@ -1,0 +1,13 @@
+{
+  "required": ["error", "message"],
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "message": {
+      "type": "string"
+    }
+  }
+}
