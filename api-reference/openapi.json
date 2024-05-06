@@ -1,0 +1,1322 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI Plant Store",
+    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.snaptrude.com"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/import/permission": {
+      "get": {
+        "description": "Check for permission",
+        "parameters": [
+          {
+            "name": "floorkey",
+            "in": "query",
+            "description": "floorkey of the project",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Checks for two things for a given floorkey",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "access"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "access": {
+                      "description": "Either the user has access or not",
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    },
+                    "image": {
+                      "description": "Latest screenshot of the project. Given as a path",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Project name",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/import/state": {
+      "get": {
+        "description": "Get revit import state",
+        "parameters": [
+          {
+            "name": "floorkey",
+            "in": "query",
+            "description": "floorkey of the project",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "project"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "description": "",
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "description": "Project name",
+                          "type": "string"
+                        },
+                        "importStates": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "revitImportState": {
+                              "description": "Revit import state",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "floorkey does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "no project",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "unknown exception / server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Internal Server Error",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Set revit import state",
+        "parameters": [
+          {
+            "name": "floorkey",
+            "in": "query",
+            "description": "floorkey of the project",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "revitImportState",
+            "in": "query",
+            "description": "must be NA/NEW/RFA/MODIFIED/DONE",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "project"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "description": "",
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "description": "Project name",
+                          "type": "string"
+                        },
+                        "importStates": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "revitImportState": {
+                              "description": "Revit import state",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "unknown exception / server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Internal Server Error",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "floorkey does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "no project",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "unknown exception / server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Internal Server Error",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/s3/presigned-url/upload": {
+      "post": {
+        "description": "Get presigned url of S3 bucket to upload data",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Path inside AWS S3 bucket to upload at",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "url",
+                    "fields"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "description": "https://snaptrude-xyz.s3.amazonaws.com/",
+                      "type": "string"
+                    },
+                    "fields": {
+                      "description": "authorization details",
+                      "type": "object",
+                      "properties": {
+                        "x-amz-algorithm": {
+                          "description": "authorization algorithm",
+                          "type": "string"
+                        },
+                        "key": {
+                          "description": "path to upload at",
+                          "type": "string"
+                        },
+                        "x-amz-signature": {
+                          "description": "AWS signature",
+                          "type": "string"
+                        },
+                        "policy": {
+                          "description": "policy",
+                          "type": "string"
+                        },
+                        "x-amz-date": {
+                          "description": "date",
+                          "type": "string"
+                        },
+                        "x-amz-credential": {
+                          "description": "credential",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/s3/presigned-url/download": {
+      "get": {
+        "description": "Get presigned url of S3 bucket to download data",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Path inside AWS S3 bucket to download from",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "url"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "description": "https://snaptrude-xyz.s3.amazonaws.com/",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/folderWithoutProject": {
+      "post": {
+        "description": "Get folders from my workspace",
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Determines the number of folders to bypass before retrieving the initial folder. (Set to 0 if not relevant)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Defines the maximum count of folders to be fetched.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "folder",
+            "in": "query",
+            "description": "(optional) Represents the parent folder's unique ID. If not specified, the API call will retrieve folders within my workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "folders"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "folders": {
+                      "description": "folders from workspace",
+                      "type": "array",
+                      "items": {
+                        "description": "Folder",
+                        "type": "object",
+                        "properties": {
+                          "all_parents": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the folder",
+                            "type": "string"
+                          },
+                          "user_dashboard": {
+                            "description": "user id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "deleted": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "immediate_parent": {
+                            "description": "parent folder id, folder is at root level so null",
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "description": "user id who created the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "last_updated_by": {
+                            "description": "user id who last updated the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "team_dashboard": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "folder id",
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/{teamId}/folderWithoutProject": {
+      "post": {
+        "description": "Get folders from the team",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "team id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Determines the number of folders to bypass before retrieving the initial folder. (Set to 0 if not relevant)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Defines the maximum count of folders to be fetched.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "folder",
+            "in": "query",
+            "description": "(optional) Represents the parent folder's unique ID. If not specified, the API call will retrieve folders within my workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "folders"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "folders": {
+                      "description": "folders from workspace",
+                      "type": "array",
+                      "items": {
+                        "description": "Folder",
+                        "type": "object",
+                        "properties": {
+                          "all_parents": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the folder",
+                            "type": "string"
+                          },
+                          "user_dashboard": {
+                            "description": "user id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "deleted": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "immediate_parent": {
+                            "description": "parent folder id, folder is at root level so null",
+                            "type": "string"
+                          },
+                          "created_by": {
+                            "description": "user id who created the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "last_updated_by": {
+                            "description": "user id who last updated the folder",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "team_dashboard": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "folder id",
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/newBlankProject": {
+      "post": {
+        "description": "Create a new blank project in Snaptrude",
+        "parameters": [
+          {
+            "name": "project_name",
+            "in": "query",
+            "description": "name of the project",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "team_id",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "folder_id",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "project"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "description": "folders from workspace",
+                      "type": "object",
+                      "properties": {
+                        "updated": {
+                          "description": "last updated date and time",
+                          "type": "string"
+                        },
+                        "added": {
+                          "description": "added on date and time",
+                          "type": "string"
+                        },
+                        "key": {
+                          "description": "floor key",
+                          "type": "string"
+                        },
+                        "speckleStreamId": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "isSpeckleImportDone": {
+                          "description": "",
+                          "type": "boolean"
+                        },
+                        "threeDUrl": {
+                          "description": "Image path in Django server",
+                          "type": "string"
+                        },
+                        "desc": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "importStates": {
+                          "type": "object",
+                          "description": "",
+                          "properties": {
+                            "revitImportState": {
+                              "description": "Revit import state (NA/NEW/RFA/MODIFIED/DONE)",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "name": {
+                          "description": "project name",
+                          "type": "string"
+                        },
+                        "url": {
+                          "description": "",
+                          "type": "string"
+                        },
+                        "createdby": {
+                          "description": "user name",
+                          "type": "string"
+                        },
+                        "public": {
+                          "description": "",
+                          "type": "boolean"
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Project created successfully.",
+                      "type": "string"
+                    },
+                    "floorkey": {
+                      "description": "floor key",
+                      "type": "string"
+                    },
+                    "error": {
+                      "description": "error code",
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/teams/active": {
+      "post": {
+        "description": "Get list of all active teams",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "teams"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "teams": {
+                      "description": "active teams list",
+                      "type": "array",
+                      "items": {
+                        "description": "Team",
+                        "type": "object",
+                        "properties": {
+                          "domain": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isManuallyPaid": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "role": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "name of the team",
+                            "type": "string"
+                          },
+                          "members": {
+                            "description": "members of the team",
+                            "type": "array",
+                            "items": {
+                              "description": "TeamMember",
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "team_member_id": {
+                                  "description": "",
+                                  "type": "integer",
+                                  "format": "int64"
+                                },
+                                "access_level": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "role": {
+                                  "description": "",
+                                  "type": "string"
+                                },
+                                "user": {
+                                  "description": "user details",
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "user id",
+                                      "type": "integer",
+                                      "format": "int64"
+                                    },
+                                    "name": {
+                                      "description": "user name",
+                                      "type": "string"
+                                    },
+                                    "email": {
+                                      "description": "user email",
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "email": {
+                                  "description": "user email",
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "admin": {
+                            "description": "admin details",
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "description": "admin id",
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "name": {
+                                "description": "admin name",
+                                "type": "string"
+                              },
+                              "email": {
+                                "description": "admin email",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "membersCount": {
+                            "description": "number of members in the team",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "id": {
+                            "description": "team id",
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "manualPlanLastsUntil": {
+                            "description": "",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/{teamId}/getrole": {
+      "post": {
+        "description": "Get list of permissions for each role in a team",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "team id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "team"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "team": {
+                      "description": "",
+                      "type": "object",
+                      "properties": {
+                        "role": {
+                          "description": "admin | creator | viewer | editor",
+                          "type": "string"
+                        },
+                        "permissions": {
+                          "description": "",
+                          "type": "array",
+                          "items": {
+                            "description": "permission",
+                            "type": "object",
+                            "properties": {
+                              "create_project": {
+                                "description": "create project permission",
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        },
+                        "id": {
+                          "description": "team id",
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/{teamId}/project": {
+      "get": {
+        "description": "Get list of projects of a team.",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "team id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Defines the maximum count of projects to be fetched.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Determines the number of projects to bypass before retrieving the initial project. (Set to 0 if not relevant)",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "projects"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "projects": {
+                      "description": "",
+                      "type": "array",
+                      "items": {
+                        "description": "Project",
+                        "type": "object",
+                        "properties": {
+                          "updated": {
+                            "description": "last updated date and time",
+                            "type": "string"
+                          },
+                          "added": {
+                            "description": "added on date and time",
+                            "type": "string"
+                          },
+                          "key": {
+                            "description": "floor key",
+                            "type": "string"
+                          },
+                          "speckleStreamId": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "isSpeckleImportDone": {
+                            "description": "",
+                            "type": "boolean"
+                          },
+                          "threeDUrl": {
+                            "description": "Image path in Django server",
+                            "type": "string"
+                          },
+                          "desc": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "importStates": {
+                            "type": "object",
+                            "description": "",
+                            "properties": {
+                              "revitImportState": {
+                                "description": "Revit import state (NA/NEW/RFA/MODIFIED/DONE)",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "name": {
+                            "description": "project name",
+                            "type": "string"
+                          },
+                          "url": {
+                            "description": "",
+                            "type": "string"
+                          },
+                          "createdby": {
+                            "description": "user name",
+                            "type": "string"
+                          },
+                          "public": {
+                            "description": "",
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "description": "Success/failure (invalid)",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/refreshAccessToken": {
+      "post": {
+        "description": "Get a new access token",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "content-type",
+            "schema": {
+              "type": "string",
+              "example": "application/json"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ3ZTQ3MDY1LWRkYWUtNGIwMy1hYzU1LThhNjdmMzNkMDBmZSJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjIxODc1MSwiaWQiOjIsImV4cCI6MTcxMzA4Mjc1MSwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.DvLZskvgNcO-uK8Kez-mDZxysBLQZspScwKsTess4yo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "HTTP Status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjgwNTQ3NDk4LTk1MzgtNDY2OC05Y2EwLWI4YTE0OTBmMmVjYyJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2Mzk1NywiaWQiOjIsImV4cCI6MTcxMzA5NTk1NywiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.IvfoyxBwIPQN8CprNaLvvqjwRZ41VMWpLPA7pc1X5Fc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getuserprofile": {
+      "post": {
+        "description": "Get user details",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "HTTP Status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "activePlan": {
+                      "type": "string",
+                      "example": "none"
+                    },
+                    "customer_lifeCycle": {
+                      "type": "string",
+                      "example": "Paid_User"
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "10c1b4"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "example": "9999999999"
+                    },
+                    "isPro": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "projects_creation_progress": {
+                      "type": "string",
+                      "example": "morethantwoprojectscreated"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 2
+                    },
+                    "date_joined": {
+                      "type": "string",
+                      "example": "2023-08-28T06:42:33.886Z"
+                    },
+                    "is_anonymous": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "India"
+                    },
+                    "fullname": {
+                      "type": "string",
+                      "example": "shashank"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "shashank.a@snaptrude.com"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getprojects": {
+      "post": {
+        "description": "Get list of projects of a user",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImQ5YzQzZTBhLTliOTUtNGE5OS1hMGM4LTc1YzEyYzhiZjI4NCJ9.eyJ1c2VybmFtZSI6InNoYXNoYW5rLmFAc25hcHRydWRlLmNvbSIsImlhdCI6MTcxMjY2MzU4MiwiaWQiOjIsImV4cCI6MTcxMzA5NTU4MiwiZW1haWwiOiJzaGFzaGFuay5hQHNuYXB0cnVkZS5jb20ifQ.n75HlDxabMI-nB08IjEZ4PMgE0r9XGcCSxcyB80dtOo"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP Status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "description": "project",
+                    "type": "object",
+                    "properties": {
+                      "created_from": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "updated": {
+                        "type": "string",
+                        "example": "2024-04-09 04:31:51.221000+00:00"
+                      },
+                      "added": {
+                        "type": "string",
+                        "example": "2024-04-09 03:44:46.230000+00:00"
+                      },
+                      "threeDUrl": {
+                        "type": "string",
+                        "example": "2/AOCQWZ/structure_0/dir_0/threeD_AOCQWZ_5ec5XL8.png"
+                      },
+                      "key": {
+                        "type": "string",
+                        "example": "AOCQWZ"
+                      },
+                      "url": {
+                        "type": "string",
+                        "example": ""
+                      },
+                      "desc": {
+                        "type": "string",
+                        "example": "None"
+                      },
+                      "public": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "test2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "required": [
+          "error",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "auth",
+        "description": "Bearer <token>"
+      }
+    }
+  }
+}
