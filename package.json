@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "api-ref-bundler-cli": "^0.4.0",
+    "husky": "^9.0.11"
+  },
+  "scripts": {
+    "delete": "node -e \"require('fs').unlink('api-reference/openapi.json', function(err) { if (err) console.log(err); console.log('File successfully deleted!') })\"",
+    "rename": "node -e \"require('fs').rename('api-reference/unbundled-bundle.json', 'api-reference/openapi.json', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
+    "prepare": "husky"
+  }
+}

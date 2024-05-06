@@ -1,0 +1,3 @@
+npx ref-bundler api-reference/unbundled.json -d api-reference
+npm run delete
+npm run rename
